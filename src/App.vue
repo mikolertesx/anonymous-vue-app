@@ -5,15 +5,18 @@
         v-for="file in files"
         :key="file.id"
         class="item"
-        @click="selectItem(file)"
+        @click="selectItem(file.id)"
       >
-        {{ file.filename }}
+        <p>{{ file.filename }}</p>
+        <!-- TODO Add a circle progress bar -->
+        <p>{{ parseInt(file.progress) }}</p>
       </div>
     </div>
     <main>
       <div v-if="!selectedItem" class="no-item">
         <h2>No item selected</h2>
         <p>Select one item to see the data, or upload something.</p>
+        <input type="file" @change="submitFile" ref="file" />
       </div>
       <div v-else class="selected-item">
         <h2>{{ selectedItem.filename }}</h2>
@@ -33,16 +36,28 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      selectedItem: null,
+      selectedIndex: null,
+      selectedId: null,
     };
   },
   methods: {
-    selectItem(item) {
-      this.selectedItem = item;
+    selectItem(id) {
+      console.log("File is", id);
+      this.selectedId = id;
+    },
+    submitFile() {
+      const event = () => {};
+      this.$store.dispatch("uploadFile", {
+        fileAddress: this.$refs.file.files[0],
+        event,
+      });
     },
   },
   computed: {
     ...mapGetters(["files"]),
+    selectedItem() {
+      return this.files.find((file) => file.id === this.selectedId) || null;
+    },
   },
 };
 </script>

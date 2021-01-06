@@ -13,6 +13,7 @@ class File {
     this.filesize = filesize;
     this.date = date;
     this.uploaded = uploaded;
+    this.progress = 0;
   }
 }
 
