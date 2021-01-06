@@ -1,8 +1,8 @@
 import { createApp } from "vue";
-import Vuex from "vuex";
-
 import App from "./App.vue";
+import files from "./store/files/";
 
 const app = createApp(App);
-app.use(Vuex);
+app.use(files);
+
 app.mount("#app");

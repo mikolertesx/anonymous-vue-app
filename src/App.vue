@@ -2,12 +2,12 @@
   <div class="content">
     <div class="sidebar">
       <div
-        v-for="item in items"
-        :key="item"
+        v-for="file in files"
+        :key="file.id"
         class="item"
-        @click="selectItem(item)"
+        @click="selectItem(file)"
       >
-        {{ item }}
+        {{ file.filename }}
       </div>
     </div>
     <main>
@@ -15,9 +15,9 @@
         <h2>No item selected</h2>
         <p>Select one item to see the data, or upload something.</p>
       </div>
-      <div class="selected-item">
-        <h2>{{ selectedItem }}</h2>
-        <p>File url</p>
+      <div v-else class="selected-item">
+        <h2>{{ selectedItem.filename }}</h2>
+        <p>{{ selectedItem.url }}</p>
         <div class="selected-item-actions">
           <button>Copy</button>
           <button>Delete</button>
@@ -28,10 +28,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      items: ["Archivo 1", "Archivo 2", "Archivo 3", "Archivo 4", "Archivo 5"],
       selectedItem: null,
     };
   },
@@ -39,6 +40,9 @@ export default {
     selectItem(item) {
       this.selectedItem = item;
     },
+  },
+  computed: {
+    ...mapGetters(["files"]),
   },
 };
 </script>
