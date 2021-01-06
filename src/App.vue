@@ -9,8 +9,9 @@
       >
         <p>{{ file.filename }}</p>
         <!-- TODO Add a circle progress bar -->
-        <p>{{ parseInt(file.progress) }}</p>
+        <p>{{ parseInt(file.progress) }}%</p>
       </div>
+      <div class="item" @click="selectItem(null)">+</div>
     </div>
     <main>
       <div v-if="!selectedItem" class="no-item">
@@ -42,7 +43,6 @@ export default {
   },
   methods: {
     selectItem(id) {
-      console.log("File is", id);
       this.selectedId = id;
     },
     submitFile() {
@@ -77,6 +77,7 @@ export default {
 
 .sidebar {
   flex-basis: 30%;
+  max-width: 256px;
   border-right: 1px black solid;
   overflow-y: auto;
 }
@@ -84,6 +85,15 @@ export default {
 .item {
   height: 122px;
   border-bottom: 1px solid black;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.item * {
+  margin: 4px;
 }
 
 .item:hover {

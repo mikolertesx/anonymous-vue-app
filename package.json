@@ -15,9 +15,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "easy-circular-progress": "^1.0.4",
     "vue": "^3.0.0",
-    "vue-radial-progress": "^0.3.2",
     "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
