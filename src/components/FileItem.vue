@@ -2,8 +2,12 @@
   <div class="item" @click="$emit('selectItem', id)">
     <p>{{ filename }}</p>
     <!-- TODO Add a circle progress bar -->
-    <i v-if="progress !== 100" class="pi pi-spin pi-spinner"></i>
-    <p v-if="progress !== 100">{{ progress }}%</p>
+    <progress-bar
+      :value="progress"
+      style="width: 100%; color: white; height: 40px"
+    >
+      <p style="color: white">{{ progress }}%</p>
+    </progress-bar>
   </div>
 </template>
 

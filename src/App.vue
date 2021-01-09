@@ -23,12 +23,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-
-// CSS libraries for prime-icons.
-import "primevue/resources/themes/saga-blue/theme.css";
-import "primevue/resources/primevue.min.css";
-import "primeicons/primeicons.css";
-
 import SelectedItem from "./components/SelectedItem";
 import UnselectedItem from "./components/UnselectedItem";
 import FileItem from "./components/FileItem";

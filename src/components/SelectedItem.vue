@@ -1,7 +1,7 @@
 <template>
   <div class="selected-item">
     <h2>{{ filename }}</h2>
-    <p v-if="url">url</p>
+    <p v-if="url">{{ url }}</p>
     <!-- TODO Add a File is processing paragraph when progress is 100% and no url is there yet. -->
     <p v-else>File is being uploaded.</p>
     <i class="pi pi-file-o" style="font-size: 10rem; cursor: pointer"></i>
