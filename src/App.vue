@@ -9,19 +9,28 @@
       >
         <p>{{ file.filename }}</p>
         <!-- TODO Add a circle progress bar -->
-        <p>{{ parseInt(file.progress) }}%</p>
+        <i v-if="file.progress !== 100" class="pi pi-spin pi-spinner"></i>
+        <p v-if="file.progress !== 100">{{ parseInt(file.progress || 0) }}%</p>
       </div>
-      <div class="item" @click="selectItem(null)">+</div>
+      <div class="item" @click="selectItem(null)">
+        <i class="pi pi-plus" style="fontsize: 2rem"></i>
+      </div>
     </div>
     <main>
       <div v-if="!selectedItem" class="no-item">
         <h2>No item selected</h2>
         <p>Select one item to see the data, or upload something.</p>
-        <input type="file" @change="submitFile" ref="file" />
+        <i
+          class="pi pi-cloud-upload"
+          style="font-size: 10rem; cursor: pointer"
+          @click="$refs.file.click()"
+        ></i>
+        <input type="file" @change="submitFile" ref="file" hidden />
       </div>
       <div v-else class="selected-item">
         <h2>{{ selectedItem.filename }}</h2>
-        <p>{{ selectedItem.url }}</p>
+        <p>{{ selectedItem.url || 'Uploading...' }}</p>
+        <i class="pi pi-file-o" style="font-size: 10rem; cursor: pointer"></i>
         <div class="selected-item-actions">
           <button>Copy</button>
           <button>Delete</button>
@@ -33,6 +42,10 @@
 
 <script>
 import { mapGetters } from "vuex";
+
+import "primevue/resources/themes/saga-blue/theme.css";
+import "primevue/resources/primevue.min.css";
+import "primeicons/primeicons.css";
 
 export default {
   data() {
