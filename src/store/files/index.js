@@ -31,6 +31,10 @@ const store = new Vuex.Store({
   },
   actions: {
     async uploadFile({ commit }, { fileAddress, event }) {
+      if (!fileAddress) {
+        console.warn("No file was selected...");
+        return;
+      }
       const formData = new FormData();
       formData.append("file", fileAddress);
 
@@ -76,10 +80,15 @@ const store = new Vuex.Store({
         commit("removeFile", fileToAdd.id);
       }
     },
-    cancelUpload({ state }, id) {
+    cancelUpload({ state, commit }, id) {
       const { files } = state;
       const fileToCancel = files.find((file) => file.id === id);
-      fileToCancel.cancel(`${fileToCancel.filename} was cancelled.`);
+      if (fileToCancel.cancel) {
+        fileToCancel.cancel(`${fileToCancel.filename} was cancelled.`);
+      } else {
+        console.log("This file is no longer uploading, deleting instead.");
+        commit("removeFile", id);
+      }
     },
   },
 });
