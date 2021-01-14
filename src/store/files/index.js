@@ -26,13 +26,12 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async uploadFile({ state, commit }, { fileAddress, event }) {
+    async uploadFile({ commit }, { fileAddress, event }) {
       const formData = new FormData();
       formData.append("file", fileAddress);
 
       const fileToAdd = new File(null, fileAddress.name, "", 0, null, false);
       commit("addFile", { file: fileToAdd });
-      const index = state.files.length - 1;
 
       const response = await Axios.post(
         "https://api.anonymousfiles.io/",
@@ -63,7 +62,7 @@ const store = new Vuex.Store({
           uploaded: true,
           progress: 100,
         },
-        index,
+        id: fileToAdd.id,
       });
     },
   },
