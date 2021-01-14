@@ -1,6 +1,7 @@
 <template>
   <div class="item" @click="$emit('selectItem', id)">
     <p>{{ filename }}</p>
+    <i class="pi pi-times" @click="cancelUpload(id)"></i>
     <!-- TODO Add a circle progress bar -->
     <progress-bar
       :value="progress"
@@ -23,6 +24,11 @@ export default {
     },
     progress() {
       return parseInt(this.file.progress || 0);
+    },
+  },
+  methods: {
+    cancelUpload(id) {
+      this.$store.dispatch("cancelUpload", id);
     },
   },
 };
