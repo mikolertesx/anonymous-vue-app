@@ -12,11 +12,12 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
-    addFile(state, { file, index = null }) {
+    addFile(state, { file, id = null }) {
       const newFiles = [...state.files];
 
-      if (index !== null) {
-        newFiles[index] = file;
+      if (id !== null) {
+        const newFileIndex = newFiles.findIndex((file) => file.id === id);
+        newFiles[newFileIndex] = file;
       } else {
         newFiles.push(file);
       }
@@ -45,7 +46,7 @@ const store = new Vuex.Store({
                 ...fileToAdd,
                 progress: currentProgress,
               },
-              index,
+              id: fileToAdd.id,
             });
           },
         }
