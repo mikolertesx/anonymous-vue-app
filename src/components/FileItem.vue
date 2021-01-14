@@ -2,7 +2,6 @@
   <div class="item" @click="$emit('selectItem', id)">
     <p>{{ filename }}</p>
     <i class="pi pi-times" @click="cancelUpload(id)"></i>
-    <!-- TODO Add a circle progress bar -->
     <progress-bar
       :value="progress"
       style="width: 100%; color: white; height: 40px"

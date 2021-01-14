@@ -2,6 +2,8 @@ import Vuex from "vuex";
 import Axios from "axios";
 import File from "../../models/File";
 
+// TODO Add it to localStorage so that we can keep the Tauri Backend.
+
 const store = new Vuex.Store({
   state: {
     files: [],
