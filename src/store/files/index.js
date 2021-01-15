@@ -2,11 +2,9 @@ import Vuex from "vuex";
 import Axios from "axios";
 import File from "../../models/File";
 
-// TODO Add it to localStorage so that we can keep the Tauri Backend.
-
 const store = new Vuex.Store({
   state: {
-    files: [],
+    files: JSON.parse(localStorage.getItem("files")) || [],
   },
   getters: {
     files(state) {
@@ -32,7 +30,7 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async uploadFile({ commit }, { fileAddress, event }) {
+    async uploadFile({ state, commit }, { fileAddress, event }) {
       if (!fileAddress) {
         console.warn("No file was selected...");
         return;
@@ -77,6 +75,8 @@ const store = new Vuex.Store({
           },
           id: fileToAdd.id,
         });
+
+        localStorage.setItem("files", JSON.stringify(state.files));
       } catch (err) {
         console.warn("Request was canceled.", err);
         commit("removeFile", fileToAdd.id);

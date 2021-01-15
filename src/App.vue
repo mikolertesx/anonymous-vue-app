@@ -57,6 +57,7 @@ export default {
       return this.files.find((file) => file.id === this.selectedId) || null;
     },
   },
+  mounted() {},
 };
 </script>
 
@@ -74,20 +75,18 @@ export default {
 }
 
 .sidebar {
-  flex-basis: 30%;
-  max-width: 256px;
+  width: 256px;
+  flex-shrink: 0;
+  flex-grow: 0;
   border-right: 1px black solid;
   overflow-y: auto;
 }
 
-.item {
-  height: 122px;
-  border-bottom: 1px solid black;
-  padding: 12px;
+main {
+  flex-grow: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
 }
 
 .item * {

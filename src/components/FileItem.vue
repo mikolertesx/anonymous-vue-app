@@ -35,7 +35,7 @@ export default {
 
 <style>
 .item {
-  height: 122px;
+  min-height: 122px;
   border-bottom: 1px solid black;
   padding: 12px;
   display: flex;

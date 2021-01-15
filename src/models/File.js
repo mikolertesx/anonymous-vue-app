@@ -1,10 +1,9 @@
-let globalId = 0;
+import { v4 as uuid } from "uuid";
 
 class File {
   constructor(id = null, filename, url = "", filesize, date, uploaded = false) {
     if (id === null) {
-      this.id = globalId.toString();
-      globalId++;
+      this.id = uuid().toString();
     } else {
       this.id = id;
     }
