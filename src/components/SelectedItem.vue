@@ -1,6 +1,7 @@
 <template>
   <div class="selected-item">
-    <h2>{{ filename }}</h2>
+    <h2 v-if="!isEditing" @click="setEditMode(true)">{{ filename }}</h2>
+    <input v-else type="text" v-model="filename" @blur="setEditMode(false)" />
     <textarea
       ref="hiddenLink"
       v-model="url"
@@ -30,12 +31,24 @@
 <script>
 export default {
   props: ["selectedItem"],
+  data() {
+    return {
+      isEditing: false,
+    };
+  },
   computed: {
     id() {
       return this.selectedItem.id;
     },
-    filename() {
-      return this.selectedItem.filename;
+    filename: {
+      get() {
+        return this.selectedItem.filename;
+      },
+      set(value) {
+        const newFile = { ...this.selectedItem };
+        newFile.filename = value;
+        this.$store.commit("addFile", { file: newFile, id: this.id });
+      },
     },
     url() {
       return this.selectedItem.url;
@@ -53,6 +66,9 @@ export default {
     },
     removeFile(id) {
       this.$store.dispatch("cancelUpload", id);
+    },
+    setEditMode(isOnEdit) {
+      this.isEditing = isOnEdit;
     },
   },
 };

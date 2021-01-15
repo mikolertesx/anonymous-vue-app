@@ -23,6 +23,7 @@ const store = new Vuex.Store({
       }
 
       state.files = newFiles;
+      localStorage.setItem("files", JSON.stringify(newFiles));
     },
     removeFile(state, id) {
       const newFiles = [...state.files.filter((file) => file.id !== id)];

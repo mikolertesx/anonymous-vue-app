@@ -18,8 +18,15 @@ export default {
     id() {
       return this.file.id;
     },
-    filename() {
-      return this.file.filename;
+    filename: {
+      get() {
+        return this.file.filename;
+      },
+      set(value) {
+        const newFile = { ...this.file };
+        newFile.filename = value;
+        this.$store.commit("addFile", { file: newFile, id: this.id });
+      },
     },
     progress() {
       return parseInt(this.file.progress || 0);
