@@ -1,7 +1,13 @@
 <template>
   <div class="selected-item">
     <h2 v-if="!isEditing" @click="setEditMode(true)">{{ filename }}</h2>
-    <input v-else type="text" v-model="filename" @blur="setEditMode(false)" />
+    <input
+      v-else
+      type="text"
+      v-model.trim="filename"
+      @blur="setEditMode(false)"
+      ref="filenameModifier"
+    />
     <textarea
       ref="hiddenLink"
       v-model="url"
@@ -69,6 +75,11 @@ export default {
     },
     setEditMode(isOnEdit) {
       this.isEditing = isOnEdit;
+      if (this.isEditing === true) {
+        setTimeout(() => {
+          this.$refs.filenameModifier.focus();
+        }, 5);
+      }
     },
   },
 };
