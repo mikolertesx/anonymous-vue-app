@@ -48,6 +48,7 @@ export default {
       this.$store.dispatch("uploadFile", {
         fileAddress: file,
         event,
+        startEvent: this.selectItem,
       });
     },
   },

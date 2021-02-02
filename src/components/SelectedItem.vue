@@ -1,17 +1,26 @@
 <template>
   <div class="selected-item">
-    <h2 v-if="!isEditing" @click="setEditMode(true)">{{ filename }}</h2>
+    <h2 v-if="!isEditing" style="font-size: 24px" @click="setEditMode(true)">
+      {{ filename }}
+    </h2>
     <input
       v-else
+      style="font-size: 24px"
       type="text"
       v-model.trim="filename"
       @blur="setEditMode(false)"
+      @keyup.enter="setEditMode(false)"
       ref="filenameModifier"
     />
     <textarea
       ref="hiddenLink"
       v-model="url"
-      style="position: absolute; margin-left: -100%; margin-top: -100%"
+      style="
+        position: absolute;
+        margin-left: -100%;
+        margin-top: -100%;
+        width: 0px;
+      "
     ></textarea>
     <a v-if="url" :href="url" target="_blank">Go to download page.</a>
     <progress-bar

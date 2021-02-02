@@ -31,7 +31,7 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async uploadFile({ state, commit }, { fileAddress, event }) {
+    async uploadFile({ state, commit }, { fileAddress, event, startEvent }) {
       if (!fileAddress) {
         console.warn("No file was selected...");
         return;
@@ -40,6 +40,10 @@ const store = new Vuex.Store({
       formData.append("file", fileAddress);
 
       const fileToAdd = new File(null, fileAddress.name, "", 0, null, false);
+      if (startEvent) {
+        startEvent(fileToAdd.id);
+      }
+
       commit("addFile", { file: fileToAdd });
 
       const signal = Axios.CancelToken.source();
