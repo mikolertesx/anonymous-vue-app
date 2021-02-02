@@ -15,10 +15,12 @@
     <textarea
       ref="hiddenLink"
       v-model="url"
+      readonly
       style="
         position: absolute;
-        margin-left: -100%;
-        margin-top: -100%;
+        margin-left: -100vw;
+        margin-top: -100vh;
+        border-style: none;
         width: 0px;
       "
     ></textarea>
@@ -123,7 +125,9 @@ export default {
 }
 
 .selected-item-actions button {
-  border: 1px solid gray;
+  flex: none;
+  border-style: none;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   outline: none;
   width: 126px;
